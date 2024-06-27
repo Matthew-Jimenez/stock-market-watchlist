@@ -37,3 +37,8 @@
 :white_large_square: Watchlist items can be removed by selecting the watchlist edit button
 :white_large_square: The watchlist edit button displays a delete button to the right of each watchlist item
 :white_large_square: The watchlist should be infinite scrolling w/ support for list virtulization
+
+
+## Dependencies
+- react-router-dom
+- react-query
