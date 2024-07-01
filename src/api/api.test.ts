@@ -1,6 +1,6 @@
 import API from "./api";
 
-describe("QuoteAPI", () => {
+describe("MainAPI", () => {
   describe("getLastTrade", () => {
     it("should call the api with the correct path", () => {
       const mockGet = jest.fn();

@@ -1,3 +1,4 @@
+import CompanyChartContainer from "../../features/company-chart/components/container";
 import Quote from "../../features/quote/components/container";
 
 const BrowseRoute = () => {
@@ -6,6 +7,10 @@ const BrowseRoute = () => {
       <h1>Browse</h1>
 
       <Quote symbol="SPY" />
+
+      <div style={{ height: 400, width: 600 }}>
+        <CompanyChartContainer symbol="SPY" />
+      </div>
     </div>
   );
 };

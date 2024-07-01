@@ -2,12 +2,12 @@ import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
 
 import { renderHook, waitFor } from "@testing-library/react";
-import { useLastTrade } from "./get-last-trade";
+import { useIntradayHistory } from "./get-intraday-history";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // todo: extract shared logic to a test-utils file
 const server = setupServer(
-  http.get("http://localhost:3000/api/last-trade", ({ request }) => {
+  http.get("http://localhost:3000/api/intraday-history", ({ request }) => {
     const url = new URL(request.url);
 
     const symbol = url.searchParams.get("symbol");
@@ -24,8 +24,8 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-describe("useLastTrade", () => {
-  it("should call QuoteAPI.getLastTrade with the symbol", async () => {
+describe("useIntradayHistory", () => {
+  it("should call QuoteAPI.getIntradayHistory with the symbol", async () => {
     const queryClient = new QueryClient();
 
     const wrapper = ({ children }: any) => {
@@ -38,7 +38,9 @@ describe("useLastTrade", () => {
 
     const symbol = "AAPL";
 
-    const { result } = renderHook(() => useLastTrade({ symbol }), { wrapper });
+    const { result } = renderHook(() => useIntradayHistory({ symbol }), {
+      wrapper,
+    });
 
     await waitFor(() =>
       expect(result.current.data).toEqual({ greeting: "hello there" })
