@@ -1,7 +1,7 @@
 class BaseAPI {
   constructor(private baseUrl: string) {}
 
-  protected get = async <ResponseType>(url: string) => {
+  public get = async <ResponseType>(url: string) => {
     const res = await fetch(`${this.baseUrl}${url}`, {
       method: "GET",
     });
