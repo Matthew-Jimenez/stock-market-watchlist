@@ -3,9 +3,10 @@ import QuoteAPI from "./api";
 
 type UseQuoteOptions = {
   symbol?: string;
+  refetchInterval?: number;
 };
 
-export const useLastTrade = ({ symbol }: UseQuoteOptions) => {
+export const useLastTrade = ({ symbol, refetchInterval }: UseQuoteOptions) => {
   return useQuery({
     queryKey: ["quotes", symbol],
     queryFn: () => {
@@ -16,5 +17,6 @@ export const useLastTrade = ({ symbol }: UseQuoteOptions) => {
       return api.getLastTrade(symbol);
     },
     enabled: !!symbol,
+    refetchInterval,
   });
 };
