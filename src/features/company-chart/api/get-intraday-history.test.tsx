@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // todo: extract shared logic to a test-utils file
 const server = setupServer(
-  http.get("http://localhost:3000/api/intraday-history", ({ request }) => {
+  http.get("http://localhost:3000/api/history", ({ request }) => {
     const url = new URL(request.url);
 
     const symbol = url.searchParams.get("symbol");

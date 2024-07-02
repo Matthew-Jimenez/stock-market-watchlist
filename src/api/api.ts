@@ -16,6 +16,14 @@ class MainAPI extends BaseAPI {
 
     return this.get<HistoricalPrice[]>(`/intraday-history?symbol=${symbol}`);
   };
+
+  public getHistory = (params: GetHistoryParams) => {
+    const { symbol, range } = params;
+
+    return this.get<HistoricalPrice[]>(
+      `/history?symbol=${symbol}&range=${range}`
+    );
+  };
 }
 
 export default MainAPI;

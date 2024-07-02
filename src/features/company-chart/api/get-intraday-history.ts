@@ -21,10 +21,9 @@ export const useIntradayHistory = ({
 
       if (!symbol) throw new Error("Symbol is required");
 
-      return api.getIntradayHistory({
+      return api.getHistory({
         symbol,
-        interval,
-        from,
+        range: 1,
       });
     },
     enabled: !!symbol,
