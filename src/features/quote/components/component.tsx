@@ -5,6 +5,7 @@ import React from "react";
 import toDollarValue from "../../../utils/format/toDollarValue";
 import displaySymbol from "../../../utils/format/displaySymbol";
 import Skeleton from "react-loading-skeleton";
+import { Typography } from "@mui/material";
 
 interface Params {
   symbol?: string;
@@ -14,17 +15,17 @@ interface Params {
 const QuoteComponent = ({ symbol, price }: Params) => {
   return (
     <div>
-      <h2 data-testid="copy--underlying-symbol">
+      <Typography variant="h2" data-testid="copy--underlying-symbol">
         {displaySymbol(symbol) || (
           <Skeleton containerTestId="loading-skeleton--underlying-symbol" />
         )}
-      </h2>
+      </Typography>
 
-      <h3 data-testid="copy--underlying-price">
+      <Typography variant="h1" data-testid="copy--underlying-price">
         {toDollarValue(price) || (
           <Skeleton containerTestId="loading-skeleton--underlying-price" />
         )}
-      </h3>
+      </Typography>
     </div>
   );
 };
