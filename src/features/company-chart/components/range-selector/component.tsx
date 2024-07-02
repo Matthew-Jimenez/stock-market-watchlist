@@ -1,18 +1,29 @@
+import { useMemo } from "react";
+import OutlinedButtonGroup from "../../../../components/button-group/outlined";
+
 interface Params {
   onSetRange: (range: number) => void;
   range: number;
 }
 
 const RangeSelector = ({ onSetRange, range }: Params) => {
+  const buttons = useMemo(() => {
+    return [
+      { label: "1D", value: 1 },
+      { label: "1W", value: 5 },
+      { label: "1M", value: 30 },
+      { label: "3M", value: 90 },
+      { label: "1Y", value: 365 },
+      { label: "5Y", value: 1825 },
+    ];
+  }, []);
+
   return (
-    <>
-      <button onClick={() => onSetRange(1)}>1D</button>
-      <button onClick={() => onSetRange(5)}>5D</button>
-      <button onClick={() => onSetRange(30)}>1M</button>
-      <button onClick={() => onSetRange(90)}>3M</button>
-      <button onClick={() => onSetRange(365)}>1Y</button>
-      <button onClick={() => onSetRange(1825)}>5Y</button>
-    </>
+    <OutlinedButtonGroup
+      buttons={buttons}
+      onSelect={onSetRange}
+      selectedValue={range}
+    />
   );
 };
 
