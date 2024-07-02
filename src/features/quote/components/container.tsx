@@ -8,7 +8,7 @@ interface Params {
 const QuoteContainer = ({ symbol }: Params) => {
   const { data } = useLastTrade({ symbol, refetchInterval: 60000 * 5 });
 
-  return <QuoteComponent symbol={symbol} price={data?.price} />;
+  return <QuoteComponent price={data?.price} />;
 };
 
 export default QuoteContainer;

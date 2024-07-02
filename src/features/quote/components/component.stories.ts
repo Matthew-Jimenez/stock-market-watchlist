@@ -12,17 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    symbol: "aapl",
     price: 123.45,
   },
 };
 
 export const Loading: Story = {
   args: {},
-};
-
-export const NoPrice: Story = {
-  args: {
-    symbol: "aapl",
-  },
 };
