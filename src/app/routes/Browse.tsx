@@ -9,7 +9,7 @@ const BrowseRoute = () => {
       <Quote symbol="SPY" />
 
       <div style={{ height: 400, width: 600 }}>
-        <CompanyChartContainer symbol="SPY" />
+        <CompanyChartContainer symbol="SPY" range={5} />
       </div>
     </div>
   );

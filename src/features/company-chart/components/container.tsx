@@ -3,12 +3,13 @@ import Chart from "./component";
 
 interface Params {
   symbol?: string;
+  range?: number;
 }
 
-const CompanyChartContainer = ({ symbol = "" }: Params) => {
-  const { data } = useIntradayHistory({ symbol });
+const CompanyChartContainer = ({ symbol = "", range }: Params) => {
+  const { data } = useIntradayHistory({ symbol, range });
 
-  return <Chart data={data} range={1} />;
+  return <Chart data={data} range={range} />;
 };
 
 export default CompanyChartContainer;

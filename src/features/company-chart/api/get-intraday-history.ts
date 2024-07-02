@@ -3,19 +3,17 @@ import MainAPI from "../../../api/api";
 
 type Options = {
   symbol?: string;
-  interval?: string;
-  from?: string;
+  range?: number;
   refetchInterval?: number;
 };
 
 export const useIntradayHistory = ({
   symbol,
   refetchInterval,
-  interval = "5",
-  from = "2024-07-01",
+  range = 1,
 }: Options) => {
   return useQuery({
-    queryKey: ["symbol-history", interval, from, symbol],
+    queryKey: ["symbol-history", range, symbol],
     queryFn: () => {
       const api = new MainAPI();
 
@@ -23,7 +21,7 @@ export const useIntradayHistory = ({
 
       return api.getHistory({
         symbol,
-        range: 1,
+        range,
       });
     },
     enabled: !!symbol,
