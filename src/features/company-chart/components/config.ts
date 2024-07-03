@@ -6,3 +6,5 @@ export const CHART_PADDING = {
 };
 
 export const tickFormat = () => "";
+
+export const CHART_LABELS = () => ".";

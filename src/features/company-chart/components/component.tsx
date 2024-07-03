@@ -5,11 +5,11 @@ import {
   VictoryVoronoiContainer,
 } from "victory";
 import { HistoricalPrice } from "../../../types/api";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import generateChartTicks from "../utils/generateChartTicks";
 import { VoronoiHistoricalPrice } from "../types/VoronoiHistoricalPrice";
 import HoverLabel from "./hover-label/component";
-import { CHART_PADDING, tickFormat } from "./config";
+import { CHART_LABELS, CHART_PADDING, tickFormat } from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
@@ -28,6 +28,8 @@ const CompanyChart = ({
 }: Params) => {
   const _lastPointDate = data?.[data.length - 1]?.date;
 
+  const [showLabel, setShowLabel] = useState(false);
+
   const ticks = useMemo(() => {
     return generateChartTicks(_lastPointDate, range);
   }, [range, _lastPointDate]);
@@ -45,12 +47,19 @@ const CompanyChart = ({
     [onPointHovered]
   );
 
+  const handleTouchStart = useCallback(() => {
+    setShowLabel(true);
+  }, []);
+
   const handleDeactivated = useCallback(() => {
     onPointHovered?.();
-  }, [onPointHovered]);
+    setShowLabel(false);
+  }, [onPointHovered, setShowLabel]);
 
   return (
     <div
+      onTouchStart={handleTouchStart}
+      onMouseOver={handleTouchStart}
       onTouchCancel={handleDeactivated}
       onMouseLeave={handleDeactivated}
       onTouchEnd={handleDeactivated}
@@ -64,8 +73,8 @@ const CompanyChart = ({
           <VictoryVoronoiContainer
             responsive={true}
             onActivated={handlePointHovered}
-            labelComponent={<HoverLabel />}
-            labels={({ datum }) => `Close: ${datum.close}\nDate: ${datum.date}`}
+            labelComponent={showLabel ? <HoverLabel /> : <></>}
+            labels={CHART_LABELS}
             voronoiDimension="x"
           />
         }
