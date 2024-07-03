@@ -15,7 +15,10 @@ const QuoteComponent = ({ price }: Params) => {
     <div>
       <Typography variant="h1" data-testid="copy--underlying-price">
         {toDollarValue(price) || (
-          <Skeleton containerTestId="loading-skeleton--underlying-price" />
+          <Skeleton
+            containerTestId="loading-skeleton--underlying-price"
+            width={200}
+          />
         )}
       </Typography>
     </div>

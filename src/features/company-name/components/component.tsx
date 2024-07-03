@@ -12,7 +12,7 @@ const CompanyName = ({ name }: Params) => {
       {name || (
         <Skeleton
           containerTestId="loading-skeleton--company-name"
-          width={200}
+          width={300}
         />
       )}
     </Typography>
