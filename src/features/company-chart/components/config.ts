@@ -4,3 +4,5 @@ export const CHART_PADDING = {
   top: 40,
   bottom: 40,
 };
+
+export const tickFormat = () => "";

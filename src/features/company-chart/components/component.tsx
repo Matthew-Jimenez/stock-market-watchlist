@@ -9,7 +9,7 @@ import { useCallback, useMemo } from "react";
 import generateChartTicks from "../utils/generateChartTicks";
 import { VoronoiHistoricalPrice } from "../types/VoronoiHistoricalPrice";
 import HoverLabel from "./hover-label/component";
-import { CHART_PADDING } from "./config";
+import { CHART_PADDING, tickFormat } from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
@@ -59,7 +59,7 @@ const CompanyChart = ({ data, range, onPointHovered }: Params) => {
           />
         }
       >
-        <VictoryAxis tickValues={ticks} />
+        <VictoryAxis tickValues={ticks} tickFormat={tickFormat} />
         <VictoryAxis dependentAxis />
 
         {data?.length && (
