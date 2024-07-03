@@ -5,43 +5,73 @@ import {
   VictoryVoronoiContainer,
 } from "victory";
 import { HistoricalPrice } from "../../../types/api";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import generateChartTicks from "../utils/generateChartTicks";
+import { VoronoiHistoricalPrice } from "../types/VoronoiHistoricalPrice";
+import HoverLabel from "./hover-label/component";
+import { CHART_PADDING } from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
   range?: number;
+  onPointHovered?: (point?: HistoricalPrice) => void;
 }
 
-const CompanyChart = ({ data, range }: Params) => {
+const CompanyChart = ({ data, range, onPointHovered }: Params) => {
   const _lastPointDate = data?.[data.length - 1]?.date;
 
   const ticks = useMemo(() => {
     return generateChartTicks(_lastPointDate, range);
   }, [range, _lastPointDate]);
 
-  return (
-    <VictoryChart
-      data-testid="company-chart"
-      containerComponent={
-        <VictoryVoronoiContainer
-          labels={({ datum }) => `Close: ${datum.close}\nDate: ${datum.date}`}
-          voronoiDimension="x"
-        />
-      }
-    >
-      <VictoryAxis tickValues={ticks} />
-      <VictoryAxis dependentAxis />
+  const handlePointHovered = useCallback(
+    (points?: VoronoiHistoricalPrice[]) => {
+      try {
+        const point = points?.[0];
 
-      {data?.length && (
-        <VictoryLine
-          data-testid="company-chart-line"
-          data={data}
-          x="date"
-          y="close"
-        />
-      )}
-    </VictoryChart>
+        onPointHovered?.(point);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [onPointHovered]
+  );
+
+  const handleDeactivated = useCallback(() => {
+    onPointHovered?.();
+  }, [onPointHovered]);
+
+  return (
+    <div
+      onTouchCancel={handleDeactivated}
+      onMouseLeave={handleDeactivated}
+      onTouchEnd={handleDeactivated}
+    >
+      <VictoryChart
+        padding={CHART_PADDING}
+        data-testid="company-chart"
+        containerComponent={
+          <VictoryVoronoiContainer
+            onActivated={handlePointHovered}
+            labelComponent={<HoverLabel />}
+            labels={({ datum }) => `Close: ${datum.close}\nDate: ${datum.date}`}
+            voronoiDimension="x"
+          />
+        }
+      >
+        <VictoryAxis tickValues={ticks} />
+        <VictoryAxis dependentAxis />
+
+        {data?.length && (
+          <VictoryLine
+            data-testid="company-chart-line"
+            data={data}
+            x="date"
+            y="close"
+          />
+        )}
+      </VictoryChart>
+    </div>
   );
 };
 

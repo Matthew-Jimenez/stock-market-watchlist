@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import BrowseRoute from "./routes/Browse";
+import Browse from "./routes/Browse";
 
 const AppRouter = () => {
   const router = useMemo(
@@ -8,7 +8,7 @@ const AppRouter = () => {
       createBrowserRouter([
         {
           path: "/",
-          Component: BrowseRoute,
+          Component: Browse,
         },
       ]),
     []
