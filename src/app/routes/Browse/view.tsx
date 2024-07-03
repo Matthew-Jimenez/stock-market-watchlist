@@ -2,15 +2,19 @@ import CompanyName from "../../../features/company-name/components/component";
 import Chart from "./containers/chart";
 import Quote from "./containers/quote";
 
-const BrowseView = () => {
+interface Props {
+  symbol?: string;
+}
+
+const BrowseView = ({ symbol }: Props) => {
   return (
     <div>
       <CompanyName name="SPDR S&P 500 ETF" />
 
-      <Quote symbol="SPY" />
+      <Quote symbol={symbol} />
 
       <div style={{ height: 400, width: 600 }}>
-        <Chart symbol="SPY" />
+        <Chart symbol={symbol} />
       </div>
     </div>
   );
