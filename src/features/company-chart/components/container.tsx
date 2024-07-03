@@ -7,9 +7,16 @@ import React from "react";
 interface Params {
   symbol?: string;
   onPointHovered?: (point: any) => void;
+  height?: number;
+  width?: number;
 }
 
-const CompanyChartContainer = ({ symbol = "", onPointHovered }: Params) => {
+const CompanyChartContainer = ({
+  symbol = "",
+  onPointHovered,
+  height,
+  width,
+}: Params) => {
   const [range, setRange] = useState<number>(1);
 
   const { data } = useIntradayHistory({ symbol, range });
@@ -18,7 +25,13 @@ const CompanyChartContainer = ({ symbol = "", onPointHovered }: Params) => {
     <>
       <RangeSelector onSetRange={setRange} range={range} />
 
-      <Chart onPointHovered={onPointHovered} data={data} range={range} />
+      <Chart
+        onPointHovered={onPointHovered}
+        data={data}
+        range={range}
+        height={height}
+        width={width}
+      />
     </>
   );
 };
