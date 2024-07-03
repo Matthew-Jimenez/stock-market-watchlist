@@ -1,4 +1,4 @@
-import CompanyName from "../../../features/company-name/components/component";
+import CompanyNameContainer from "../../../features/company-name/components/container";
 import Chart from "./containers/chart";
 import Quote from "./containers/quote";
 
@@ -9,7 +9,7 @@ interface Props {
 const BrowseView = ({ symbol }: Props) => {
   return (
     <div>
-      <CompanyName name="SPDR S&P 500 ETF" />
+      <CompanyNameContainer symbol={symbol} />
 
       <Quote symbol={symbol} />
 
