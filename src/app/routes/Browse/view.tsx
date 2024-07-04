@@ -1,15 +1,17 @@
+import { Box } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import CompanyNameContainer from "../../../features/company-name/components/container";
+
+import WatchlistList from "features/watchlist/components/container";
+import ToggleWatchlist from "features/watchlist/components/toggle/container";
+import CompanyName from "features/company-name/components/container";
+
 import Chart from "./containers/chart";
 import Quote from "./containers/quote";
-import { Box } from "@mui/material";
 import {
   CHART_BOX_STYLES,
   COMPANY_NAME_CONTAINER_STYLES,
   VIEW_BOX_STYLES,
 } from "./config/styles";
-import WatchlistList from "../../../features/watchlist/components/container";
-import ToggleWatchlistItem from "../../../features/watchlist/components/toggle/container";
 
 interface Props {
   symbol?: string;
@@ -62,9 +64,9 @@ const BrowseView = ({ symbol }: Props) => {
         display={COMPANY_NAME_CONTAINER_STYLES.display}
         alignItems={COMPANY_NAME_CONTAINER_STYLES.alignItems}
       >
-        <CompanyNameContainer symbol={symbol} />
+        <CompanyName symbol={symbol} />
 
-        <ToggleWatchlistItem symbol={symbol} />
+        <ToggleWatchlist symbol={symbol} />
       </Box>
 
       <Quote symbol={symbol} />
