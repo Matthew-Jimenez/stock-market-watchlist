@@ -4,10 +4,11 @@ import { HttpResponse, http } from "msw";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useIntradayHistory } from "./get-intraday-history";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import env from "../../../config/env";
 
 // todo: extract shared logic to a test-utils file
 const server = setupServer(
-  http.get("http://localhost:3000/api/history", ({ request }) => {
+  http.get(`${env.BASE_API}/history`, ({ request }) => {
     const url = new URL(request.url);
 
     const symbol = url.searchParams.get("symbol");

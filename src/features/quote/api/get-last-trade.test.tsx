@@ -4,10 +4,11 @@ import { HttpResponse, http } from "msw";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useLastTrade } from "./get-last-trade";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import env from "../../../config/env";
 
 // todo: extract shared logic to a test-utils file
 const server = setupServer(
-  http.get("http://localhost:3000/api/last-trade", ({ request }) => {
+  http.get(`${env.BASE_API}/last-trade`, ({ request }) => {
     const url = new URL(request.url);
 
     const symbol = url.searchParams.get("symbol");
