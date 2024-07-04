@@ -1,4 +1,4 @@
-import { useLastTrade } from "../../../quote/api/get-last-trade";
+import { useQuote } from "../../../quote/api/get-quote";
 import Component from "./component";
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
 }
 
 const WatchlistListItem = ({ symbol }: Props) => {
-  const { data } = useLastTrade({ symbol, refetchInterval: 15000 });
+  const { data } = useQuote({ symbol, refetchInterval: 15000 });
 
   return <Component symbol={symbol} price={data?.price} />;
 };

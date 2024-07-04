@@ -1,6 +1,6 @@
 import env from "../config/env";
 import BaseAPI from "../lib/api-client";
-import { CompanyInfo, HistoricalPrice, LastTrade } from "../types/api";
+import { CompanyInfo, HistoricalPrice, LastTrade, Quote } from "../types/api";
 
 class MainAPI extends BaseAPI {
   constructor() {
@@ -13,6 +13,10 @@ class MainAPI extends BaseAPI {
 
   public getLastTrade = (symbol: string) => {
     return this.get<LastTrade>(`/last-trade?symbol=${symbol}`);
+  };
+
+  public getQuote = (symbol: string) => {
+    return this.get<Quote[]>(`/quote?symbol=${symbol}`);
   };
 
   public getIntradayHistory = (params: GetIntradayHistoryParams) => {

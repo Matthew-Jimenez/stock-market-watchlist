@@ -6,15 +6,17 @@ type UseQuoteOptions = {
   refetchInterval?: number;
 };
 
-export const useLastTrade = ({ symbol, refetchInterval }: UseQuoteOptions) => {
+export const useQuote = ({ symbol, refetchInterval }: UseQuoteOptions) => {
   return useQuery({
-    queryKey: ["last-trade", symbol],
-    queryFn: () => {
+    queryKey: ["quote", symbol],
+    queryFn: async () => {
       const api = new MainAPI();
 
       if (!symbol) throw new Error("Symbol is required");
 
-      return api.getLastTrade(symbol);
+      const res = await api.getQuote(symbol);
+
+      return res?.[0];
     },
     enabled: !!symbol,
     refetchInterval,

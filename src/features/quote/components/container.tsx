@@ -1,4 +1,4 @@
-import { useLastTrade } from "../api/get-last-trade";
+import { useQuote } from "../api/get-quote";
 import QuoteComponent from "./component";
 import React from "react";
 
@@ -8,7 +8,7 @@ interface Params {
 }
 
 const QuoteContainer = ({ symbol, priceOverride }: Params) => {
-  const { data } = useLastTrade({ symbol, refetchInterval: 60000 * 5 });
+  const { data } = useQuote({ symbol, refetchInterval: 60000 * 5 });
 
   return <QuoteComponent price={priceOverride || data?.price} />;
 };
