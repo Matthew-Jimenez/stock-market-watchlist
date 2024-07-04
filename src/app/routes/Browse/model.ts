@@ -1,5 +1,6 @@
 import { action, makeAutoObservable, observable } from "mobx";
-import { HistoricalPrice } from "../../../types/api";
+
+import { HistoricalPrice } from "types/api";
 
 class BrowseViewModel {
   @observable

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import Browse from "./routes/Browse";
 
 const AppRouter = () => {
