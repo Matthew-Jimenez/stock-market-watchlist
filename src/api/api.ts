@@ -28,6 +28,36 @@ class MainAPI extends BaseAPI {
       `/history?symbol=${symbol}&range=${range}`
     );
   };
+
+  // we define this in our api class because we will eventually want to
+  // send this data to a backend service instead of using local storage
+  public getWatchlist = () => {
+    const stringValue = localStorage.getItem("watchlist") || "[]";
+
+    return (JSON.parse(stringValue) as string[]) || undefined;
+  };
+
+  // we define this in our api class because we will eventually want to
+  // send this data to a backend service instead of using local storage
+  public addWatchlistItem = async (symbol: string): Promise<string> => {
+    const watchlist = this.getWatchlist();
+
+    const newWatchlist = [...watchlist, symbol];
+
+    localStorage.setItem("watchlist", JSON.stringify(newWatchlist));
+
+    return symbol;
+  };
+
+  // we define this in our api class because we will eventually want to
+  // send this data to a backend service instead of using local storage
+  public removeWatchlistItem = async (symbol: string) => {
+    const watchlist = this.getWatchlist();
+
+    const newWatchlist = watchlist.filter((s: string) => s !== symbol);
+
+    localStorage.setItem("watchlist", JSON.stringify(newWatchlist));
+  };
 }
 
 export default MainAPI;

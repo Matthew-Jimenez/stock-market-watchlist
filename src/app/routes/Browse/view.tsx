@@ -3,7 +3,13 @@ import CompanyNameContainer from "../../../features/company-name/components/cont
 import Chart from "./containers/chart";
 import Quote from "./containers/quote";
 import { Box } from "@mui/material";
-import { CHART_BOX_STYLES, VIEW_BOX_STYLES } from "./config/styles";
+import {
+  CHART_BOX_STYLES,
+  COMPANY_NAME_CONTAINER_STYLES,
+  VIEW_BOX_STYLES,
+} from "./config/styles";
+import WatchlistList from "../../../features/watchlist/components/container";
+import ToggleWatchlistItem from "../../../features/watchlist/components/toggle/container";
 
 interface Props {
   symbol?: string;
@@ -52,7 +58,14 @@ const BrowseView = ({ symbol }: Props) => {
       height={VIEW_BOX_STYLES.height}
       flexDirection={VIEW_BOX_STYLES.flexDirection}
     >
-      <CompanyNameContainer symbol={symbol} />
+      <Box
+        display={COMPANY_NAME_CONTAINER_STYLES.display}
+        alignItems={COMPANY_NAME_CONTAINER_STYLES.alignItems}
+      >
+        <CompanyNameContainer symbol={symbol} />
+
+        <ToggleWatchlistItem symbol={symbol} />
+      </Box>
 
       <Quote symbol={symbol} />
 
@@ -69,6 +82,10 @@ const BrowseView = ({ symbol }: Props) => {
             width={heightAndWidth.width}
           />
         )}
+      </Box>
+
+      <Box maxWidth={CHART_BOX_STYLES.maxWidth}>
+        <WatchlistList />
       </Box>
     </Box>
   );

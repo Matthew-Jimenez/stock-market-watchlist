@@ -10,3 +10,8 @@ export const CHART_BOX_STYLES = {
   maxWidth: 700,
   flex: 1,
 };
+
+export const COMPANY_NAME_CONTAINER_STYLES = {
+  display: "flex",
+  alignItems: "center",
+};
