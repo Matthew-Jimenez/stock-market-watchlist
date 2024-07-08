@@ -1,5 +1,7 @@
-import { Box, Container } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+
+import Container from "components/container/component";
+import Box from "components/box/component";
 
 import WatchlistList from "features/watchlist/components/container";
 import ToggleWatchlist from "features/watchlist/components/toggle/container";

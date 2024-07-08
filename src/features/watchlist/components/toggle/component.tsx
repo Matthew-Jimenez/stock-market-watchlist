@@ -1,6 +1,8 @@
-import { IconButton } from "@mui/material";
 import React from "react";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+
+import Favorite from "components/icons/favorite-icon";
+import FavoriteBorder from "components/icons/favorite-border-icon";
+import IconButton from "components/icon-button/component";
 
 interface Props {
   isActive?: boolean;

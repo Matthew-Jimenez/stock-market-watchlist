@@ -1,7 +1,9 @@
 import { memo } from "react";
 
+import Box from "components/box/component";
+import List from "components/list/component";
+
 import SearchResultItem from "./result-item/component";
-import { Box, List } from "@mui/material";
 
 interface Props {
   results?: CompaniesSearchResponse[];

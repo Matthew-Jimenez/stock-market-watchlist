@@ -1,5 +1,4 @@
 export const CONTAINER_GRID = {
-  spacing: [0, 0, 3],
   alignItems: "center",
 };
 

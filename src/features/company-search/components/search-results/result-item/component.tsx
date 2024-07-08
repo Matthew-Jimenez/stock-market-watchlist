@@ -1,6 +1,9 @@
-import { Grid, ListItemButton } from "@mui/material";
-import Typography from "components/typography";
 import { memo, useCallback } from "react";
+
+import Typography from "components/typography";
+import ListItemButton from "components/list/list-item-button/component";
+import Grid from "components/grid/component";
+
 import { COMPANY_NAME, CONTAINER_GRID } from "./styles";
 
 interface Props {
@@ -18,12 +21,8 @@ const SearchResultItem = ({ symbol, companyName, onSelection }: Props) => {
 
   return (
     <ListItemButton divider onClick={handleSelection}>
-      <Grid
-        container
-        alignItems={CONTAINER_GRID.alignItems}
-        spacing={CONTAINER_GRID.spacing}
-      >
-        <Grid item xs={4} md="auto">
+      <Grid container alignItems={CONTAINER_GRID.alignItems}>
+        <Grid item xs={4} md={1.5}>
           <Typography fontWeight={600} variant="h5">
             {symbol}
           </Typography>

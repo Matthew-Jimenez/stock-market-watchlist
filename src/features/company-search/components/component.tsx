@@ -1,7 +1,9 @@
 import { memo } from "react";
+
+import Box from "components/box/component";
+
 import SearchInput from "./search-input/component";
 import SearchResults from "./search-results/component";
-import { Box } from "@mui/material";
 
 interface Props {
   value?: string;

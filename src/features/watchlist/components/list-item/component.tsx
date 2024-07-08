@@ -1,4 +1,5 @@
-import { ListItemButton, ListItemText } from "@mui/material";
+import { ListItemText } from "@mui/material";
+import ListItemButton from "components/list/list-item-button/component";
 
 interface Params {
   symbol?: string;

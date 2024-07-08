@@ -1,6 +1,7 @@
-import { List } from "@mui/material";
 import { memo } from "react";
 import { Link } from "react-router-dom";
+
+import List from "components/list/component";
 
 import WatchlistListItem from "./list-item/container";
 import { useGetWatchlist } from "../api/get-watchlist";
