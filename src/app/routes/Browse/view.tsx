@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 import WatchlistList from "features/watchlist/components/container";
@@ -12,6 +12,7 @@ import {
   COMPANY_NAME_CONTAINER_STYLES,
   VIEW_BOX_STYLES,
 } from "./config/styles";
+import CompanySearchContainer from "features/company-search/components/container";
 
 interface Props {
   symbol?: string;
@@ -54,42 +55,47 @@ const BrowseView = ({ symbol }: Props) => {
   }, []);
 
   return (
-    <Box
-      component="div"
-      display={VIEW_BOX_STYLES.display}
-      height={VIEW_BOX_STYLES.height}
-      flexDirection={VIEW_BOX_STYLES.flexDirection}
-    >
+    <Container>
       <Box
-        display={COMPANY_NAME_CONTAINER_STYLES.display}
-        alignItems={COMPANY_NAME_CONTAINER_STYLES.alignItems}
+        py={2}
+        component="div"
+        display={VIEW_BOX_STYLES.display}
+        height={VIEW_BOX_STYLES.height}
+        flexDirection={VIEW_BOX_STYLES.flexDirection}
       >
-        <CompanyName symbol={symbol} />
+        <CompanySearchContainer />
 
-        <ToggleWatchlist symbol={symbol} />
+        <Box
+          display={COMPANY_NAME_CONTAINER_STYLES.display}
+          alignItems={COMPANY_NAME_CONTAINER_STYLES.alignItems}
+        >
+          <CompanyName symbol={symbol} />
+
+          <ToggleWatchlist symbol={symbol} />
+        </Box>
+
+        <Quote symbol={symbol} />
+
+        <Box
+          ref={ref}
+          flex={CHART_BOX_STYLES.flex}
+          maxWidth={CHART_BOX_STYLES.maxWidth}
+          maxHeight={CHART_BOX_STYLES.maxHeight}
+        >
+          {!!heightAndWidth && (
+            <Chart
+              symbol={symbol}
+              height={heightAndWidth.height}
+              width={heightAndWidth.width}
+            />
+          )}
+        </Box>
+
+        <Box maxWidth={CHART_BOX_STYLES.maxWidth}>
+          <WatchlistList />
+        </Box>
       </Box>
-
-      <Quote symbol={symbol} />
-
-      <Box
-        ref={ref}
-        flex={CHART_BOX_STYLES.flex}
-        maxWidth={CHART_BOX_STYLES.maxWidth}
-        maxHeight={CHART_BOX_STYLES.maxHeight}
-      >
-        {!!heightAndWidth && (
-          <Chart
-            symbol={symbol}
-            height={heightAndWidth.height}
-            width={heightAndWidth.width}
-          />
-        )}
-      </Box>
-
-      <Box maxWidth={CHART_BOX_STYLES.maxWidth}>
-        <WatchlistList />
-      </Box>
-    </Box>
+    </Container>
   );
 };
 
