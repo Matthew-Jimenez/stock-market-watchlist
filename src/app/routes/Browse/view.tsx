@@ -6,6 +6,7 @@ import Box from "components/box/component";
 import WatchlistList from "features/watchlist/components/container";
 import ToggleWatchlist from "features/watchlist/components/toggle/container";
 import CompanyName from "features/company-name/components/container";
+import CompanySearchContainer from "features/company-search/components/container";
 
 import Chart from "./containers/chart";
 import Quote from "./containers/quote";
@@ -14,7 +15,6 @@ import {
   COMPANY_NAME_CONTAINER_STYLES,
   VIEW_BOX_STYLES,
 } from "./config/styles";
-import CompanySearchContainer from "features/company-search/components/container";
 
 interface Props {
   symbol?: string;
