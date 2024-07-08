@@ -1,4 +1,7 @@
-import { useQuote } from "../../../quote/api/get-quote";
+// APP_NOTE - consideration: we may need to move this file up to a common location
+// that may look like src/api/hooks/quote/get-quote.ts or src/api/quote/get-quote.ts
+import { useQuote } from "features/quote/api/get-quote";
+
 import Component from "./component";
 
 interface Props {

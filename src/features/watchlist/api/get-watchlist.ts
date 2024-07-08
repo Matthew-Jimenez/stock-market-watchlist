@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import MainAPI from "../../../api/api";
+
+import MainAPI from "api/api";
 
 export const useGetWatchlist = () => {
   return useQuery({

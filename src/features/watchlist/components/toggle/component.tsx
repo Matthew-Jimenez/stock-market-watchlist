@@ -1,6 +1,5 @@
 import { IconButton } from "@mui/material";
 import React from "react";
-
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 interface Props {

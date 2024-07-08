@@ -19,6 +19,6 @@ export const useQuote = ({ symbol, refetchInterval }: UseQuoteOptions) => {
       return res?.[0];
     },
     enabled: !!symbol,
-    refetchInterval,
+    refetchInterval: 1000,
   });
 };

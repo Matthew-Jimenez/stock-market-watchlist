@@ -1,7 +1,9 @@
 import React from "react";
-import useAddToWatchlist from "../../api/add-watchlist-item";
-import { useGetWatchlist } from "../../api/get-watchlist";
-import useRemoveWatchlistItem from "../../api/remove-watchlist-item";
+
+import useAddToWatchlist from "features/watchlist/api/add-watchlist-item";
+import useRemoveWatchlistItem from "features/watchlist/api/remove-watchlist-item";
+import { useGetWatchlist } from "features/watchlist/api/get-watchlist";
+
 import ToggleWatchlistItem from "./component";
 
 interface Props {
