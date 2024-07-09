@@ -71,7 +71,7 @@ const CompanyChart = ({
         data-testid="company-chart"
         containerComponent={
           <VictoryVoronoiContainer
-            responsive={true}
+            responsive={false}
             onActivated={handlePointHovered}
             labelComponent={showLabel ? <HoverLabel /> : <></>}
             labels={CHART_LABELS}

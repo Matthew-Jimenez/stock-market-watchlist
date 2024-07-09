@@ -22,17 +22,19 @@ const CompanyChartContainer = ({
   const { data } = useIntradayHistory({ symbol, range });
 
   return (
-    <>
-      <RangeSelector onSetRange={setRange} range={range} />
-
+    <div style={{ height, width }}>
       <Chart
         onPointHovered={onPointHovered}
         data={data}
         range={range}
-        height={height}
+        height={height ? height - 40 : undefined}
         width={width}
       />
-    </>
+
+      <div style={{ height: 40, overflow: "hidden" }}>
+        <RangeSelector onSetRange={setRange} range={range} />
+      </div>
+    </div>
   );
 };
 

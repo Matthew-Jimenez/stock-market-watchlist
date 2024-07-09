@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Container from "components/container/component";
 import Box from "components/box/component";
+import Grid from "components/grid/component";
 
 import WatchlistList from "features/watchlist/components/container";
 import ToggleWatchlist from "features/watchlist/components/toggle/container";
@@ -11,9 +12,8 @@ import CompanySearchContainer from "features/company-search/components/container
 import Chart from "./containers/chart";
 import Quote from "./containers/quote";
 import {
-  CHART_BOX_STYLES,
   COMPANY_NAME_CONTAINER_STYLES,
-  VIEW_BOX_STYLES,
+  CONTAINER_STYLES,
 } from "./config/styles";
 
 interface Props {
@@ -57,45 +57,35 @@ const BrowseView = ({ symbol }: Props) => {
   }, []);
 
   return (
-    <Container>
-      <Box
-        py={2}
-        component="div"
-        display={VIEW_BOX_STYLES.display}
-        height={VIEW_BOX_STYLES.height}
-        flexDirection={VIEW_BOX_STYLES.flexDirection}
-      >
-        <CompanySearchContainer />
+    <Container style={CONTAINER_STYLES} maxWidth={"xl"}>
+      <Box minHeight={"90%"} display={"flex"} flexDirection={"column"}>
+        <Grid flex={1} container>
+          <Grid item xs={12} lg={8} container direction={"column"}>
+            <CompanySearchContainer />
 
-        <Box
-          display={COMPANY_NAME_CONTAINER_STYLES.display}
-          alignItems={COMPANY_NAME_CONTAINER_STYLES.alignItems}
-        >
-          <CompanyName symbol={symbol} />
+            <Box style={COMPANY_NAME_CONTAINER_STYLES}>
+              <CompanyName symbol={symbol} />
 
-          <ToggleWatchlist symbol={symbol} />
-        </Box>
+              <ToggleWatchlist symbol={symbol} />
+            </Box>
 
-        <Quote symbol={symbol} />
+            <Quote symbol={symbol} />
 
-        <Box
-          ref={ref}
-          flex={CHART_BOX_STYLES.flex}
-          maxWidth={CHART_BOX_STYLES.maxWidth}
-          maxHeight={CHART_BOX_STYLES.maxHeight}
-        >
-          {!!heightAndWidth && (
-            <Chart
-              symbol={symbol}
-              height={heightAndWidth.height}
-              width={heightAndWidth.width}
-            />
-          )}
-        </Box>
+            <Box ref={ref} flex={1} maxHeight={600}>
+              {!!heightAndWidth && (
+                <Chart
+                  symbol={symbol}
+                  height={heightAndWidth.height}
+                  width={heightAndWidth.width}
+                />
+              )}
+            </Box>
+          </Grid>
 
-        <Box maxWidth={CHART_BOX_STYLES.maxWidth}>
-          <WatchlistList />
-        </Box>
+          <Grid item xs={12} lg={4}>
+            <WatchlistList />
+          </Grid>
+        </Grid>
       </Box>
     </Container>
   );
