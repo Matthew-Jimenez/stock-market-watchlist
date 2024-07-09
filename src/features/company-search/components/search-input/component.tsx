@@ -17,9 +17,9 @@ const SearchInput = ({ input = "", handleChange }: Params) => {
 
   return (
     <TextField
-      placeholder="Enter a company name or symbol"
+      placeholder="Enter symbol or name"
       autoComplete="off"
-      label="Search by company"
+      label="Company search"
       variant="outlined"
       onChange={_handleChange}
       value={input}
