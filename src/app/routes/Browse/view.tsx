@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-
 import Container from "components/container/component";
 import Box from "components/box/component";
 import Grid from "components/grid/component";
@@ -16,46 +14,14 @@ import {
   CONTAINER_STYLES,
 } from "./config/styles";
 import Typography from "components/typography";
+import useDimensions from "utils/layout/useDimensions";
 
 interface Props {
   symbol?: string;
 }
 
 const BrowseView = ({ symbol }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [heightAndWidth, setHeightAndWidth] = useState<
-    | {
-        height: number;
-        width: number;
-      }
-    | undefined
-  >(undefined);
-
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      if (entries.length === 0) return;
-
-      const entry = entries[0];
-
-      setHeightAndWidth({
-        height: entry.contentRect.height,
-        width: entry.contentRect.width,
-      });
-    });
-
-    const currentRef = ref.current;
-
-    if (currentRef) {
-      resizeObserver.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        resizeObserver.unobserve(currentRef);
-      }
-    };
-  }, [symbol]);
+  const { targetRef, dimensions } = useDimensions({ reloadDep: symbol });
 
   return (
     <Container style={CONTAINER_STYLES} maxWidth={"xl"}>
@@ -74,12 +40,12 @@ const BrowseView = ({ symbol }: Props) => {
 
                 <Quote symbol={symbol} />
 
-                <Box ref={ref} flex={1} maxHeight={600}>
-                  {!!heightAndWidth && (
+                <Box ref={targetRef} flex={1} maxHeight={600}>
+                  {!!dimensions && (
                     <Chart
                       symbol={symbol}
-                      height={heightAndWidth.height}
-                      width={heightAndWidth.width}
+                      height={dimensions.height}
+                      width={dimensions.width}
                     />
                   )}
                 </Box>
