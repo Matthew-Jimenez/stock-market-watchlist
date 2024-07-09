@@ -15,6 +15,7 @@ import {
   COMPANY_NAME_CONTAINER_STYLES,
   CONTAINER_STYLES,
 } from "./config/styles";
+import Typography from "components/typography";
 
 interface Props {
   symbol?: string;
@@ -83,6 +84,8 @@ const BrowseView = ({ symbol }: Props) => {
           </Grid>
 
           <Grid item xs={12} lg={4}>
+            <Typography variant={"h6"}>Watchlist</Typography>
+
             <WatchlistList />
           </Grid>
         </Grid>
