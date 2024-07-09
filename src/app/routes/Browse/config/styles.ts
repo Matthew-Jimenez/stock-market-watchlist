@@ -9,3 +9,20 @@ export const CONTAINER_STYLES = {
   paddingTop: 24,
   paddingBottom: 12,
 };
+
+export const WATCHLIST_HEADER_STYLES = {
+  marginTop: {
+    xs: 4,
+    lg: 0,
+  },
+  textAlign: {
+    xs: "left",
+    lg: "center",
+  },
+  marginBottom: 3,
+};
+
+export const FADE_TIMEOUT = {
+  exit: 0,
+  enter: 2200,
+};
