@@ -1,6 +1,10 @@
 import Container from "components/container/component";
 import Box from "components/box/component";
 import Grid from "components/grid/component";
+import Typography from "components/typography";
+import AnimatedDiv from "components/box/animated-width";
+import Collapse from "components/transitions/Collapse";
+import Fade from "components/transitions/Fade";
 
 import WatchlistList from "features/watchlist/components/container";
 import ToggleWatchlist from "features/watchlist/components/toggle/container";
@@ -15,10 +19,8 @@ import {
   FADE_TIMEOUT,
   WATCHLIST_HEADER_STYLES,
 } from "./config/styles";
-import Typography from "components/typography";
+
 import useDimensions from "utils/layout/useDimensions";
-import AnimatedDiv from "components/box/animated-width";
-import { Collapse, Fade } from "@mui/material";
 
 interface Props {
   symbol?: string;

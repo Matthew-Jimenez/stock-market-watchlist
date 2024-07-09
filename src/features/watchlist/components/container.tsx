@@ -2,41 +2,20 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 
 import List from "components/list/component";
+import Box from "components/box/component";
+import Slide from "components/transitions/Slide";
 
+import WatchlistHowToCTA from "./how-to-cta/component";
 import WatchlistListItem from "./list-item/container";
+import { SLIDE_TIMEOUT } from "./styles";
+
 import { useGetWatchlist } from "../api/get-watchlist";
-import { Box, Fade, Slide, Typography } from "@mui/material";
-import { FavoriteBorder } from "@mui/icons-material";
-import { FADE_TIMEOUT, SLIDE_TIMEOUT } from "./styles";
 
 const WatchlistList = () => {
-  const { data } = useGetWatchlist();
+  const { data, isLoading } = useGetWatchlist();
 
   if (!data?.length)
-    return (
-      <Fade in={!data?.length} timeout={FADE_TIMEOUT}>
-        <Box
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          flexDirection="column"
-          border={".5px solid lightgrey"}
-          borderRadius={2}
-          bgcolor={"#fafafa"}
-          py={6}
-        >
-          <Typography fontWeight={600} marginBottom={2} variant={"body1"}>
-            Add a stock by hitting the
-          </Typography>
-
-          <FavoriteBorder color="primary" fontSize="large" />
-
-          <Typography fontWeight={600} marginTop={1.5} variant={"body1"}>
-            icon next to the stock name
-          </Typography>
-        </Box>
-      </Fade>
-    );
+    return <WatchlistHowToCTA fadeIn={!data?.length && !isLoading} />;
 
   return (
     <Box overflow={"hidden"}>
