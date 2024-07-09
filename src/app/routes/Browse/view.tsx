@@ -55,7 +55,7 @@ const BrowseView = ({ symbol }: Props) => {
         resizeObserver.unobserve(currentRef);
       }
     };
-  }, []);
+  }, [symbol]);
 
   return (
     <Container style={CONTAINER_STYLES} maxWidth={"xl"}>
@@ -64,23 +64,27 @@ const BrowseView = ({ symbol }: Props) => {
           <Grid item xs={12} lg={8} container direction={"column"}>
             <CompanySearchContainer />
 
-            <Box style={COMPANY_NAME_CONTAINER_STYLES}>
-              <CompanyName symbol={symbol} />
+            {!!symbol && (
+              <>
+                <Box style={COMPANY_NAME_CONTAINER_STYLES}>
+                  <CompanyName symbol={symbol} />
 
-              <ToggleWatchlist symbol={symbol} />
-            </Box>
+                  <ToggleWatchlist symbol={symbol} />
+                </Box>
 
-            <Quote symbol={symbol} />
+                <Quote symbol={symbol} />
 
-            <Box ref={ref} flex={1} maxHeight={600}>
-              {!!heightAndWidth && (
-                <Chart
-                  symbol={symbol}
-                  height={heightAndWidth.height}
-                  width={heightAndWidth.width}
-                />
-              )}
-            </Box>
+                <Box ref={ref} flex={1} maxHeight={600}>
+                  {!!heightAndWidth && (
+                    <Chart
+                      symbol={symbol}
+                      height={heightAndWidth.height}
+                      width={heightAndWidth.width}
+                    />
+                  )}
+                </Box>
+              </>
+            )}
           </Grid>
 
           <Grid item xs={12} lg={4}>
