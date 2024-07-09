@@ -1,6 +1,9 @@
 # Stock Market Watchlist
  Browse and follow popular stocks and etfs
 
+https://stock-market-watchlist.netlify.app/
+[Demo App](https://stock-market-watchlist.netlify.app/) 
+
 
 ## Requirements
 
