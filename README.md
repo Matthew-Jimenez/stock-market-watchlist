@@ -64,24 +64,19 @@ https://stock-market-watchlist.netlify.app/
 
 ## E2E (Playwright)
 
-```yarn playwright test
-    Runs the end-to-end tests.
+Auto generate tests with Codegen
 
-  yarn playwright test --ui
-    Starts the interactive UI mode.
+```yarn playwright codegen```
 
-  yarn playwright test --project=chromium
-    Runs the tests only on Desktop Chrome.
+Run the end-to-end tests
 
-  yarn playwright test example
-    Runs the tests in a specific file.
+```yarn playwright test``` 
 
-  yarn playwright test --debug
-    Runs the tests in debug mode.
+Start the interactive UI mode
 
-  yarn playwright codegen
-    Auto generate tests with Codegen.
+```yarn playwright test --ui```
 
-We suggest that you begin by typing:
+Runs the tests in debug mode
 
-    yarn playwright test```
+```yarn playwright test --debug```
+
