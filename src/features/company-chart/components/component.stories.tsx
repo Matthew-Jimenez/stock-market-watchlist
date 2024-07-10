@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Chart from "./component";
-import intradayHistory from "../stubs/intraday-history-one-day";
+import oneDayHistory from "test-utils/fixtures/history/oneDay";
 
 const meta: Meta<typeof Chart> = {
   component: Chart,
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const IntradayMondayAtClose: Story = {
   args: {
-    data: intradayHistory,
+    data: oneDayHistory,
     range: 1,
   },
 

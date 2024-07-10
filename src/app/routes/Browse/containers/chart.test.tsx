@@ -1,12 +1,12 @@
 import { render, screen, waitFor } from "@testing-library/react";
 
-import mondayAtCloseData from "features/company-chart/stubs/intraday-history-one-day";
 import { setupMockServer } from "test-utils/mockServer";
 import QueryProvider from "test-utils/MockQueryProvider";
 
 import BrowseViewModel from "../model";
 import Chart from "./chart";
 import BrowseProvider from "../provider";
+import oneDayHistory from "test-utils/fixtures/history/oneDay";
 
 jest.mock("../model");
 
@@ -41,7 +41,7 @@ describe("Chart container", () => {
 
       screen.getByTestId(`button--1W`).click();
 
-      const expectation = mondayAtCloseData[0];
+      const expectation = oneDayHistory[0];
       await waitFor(() => {
         expect(model.setChartComparePoint).toHaveBeenCalledWith(expectation);
       });

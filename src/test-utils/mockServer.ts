@@ -2,12 +2,12 @@ import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 
 import env from "config/env";
-import historyData from "features/company-chart/stubs/intraday-history-one-day";
+import oneDayHistory from "./fixtures/history/oneDay";
 
 // Define handlers
 export const createHandlers = () => [
   http.get(`${env.BASE_API}/history`, () => {
-    return HttpResponse.json(historyData);
+    return HttpResponse.json(oneDayHistory);
   }),
   http.get(`${env.BASE_API}/last-trade`, ({ request }) => {
     const url = new URL(request.url);
