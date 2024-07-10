@@ -38,7 +38,8 @@
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "react-scripts test --transformIgnorePatterns \"@bundled-es-modules/statuses/index-esm.js:172\""
+    "test": "react-scripts test --transformIgnorePatterns \"@bundled-es-modules/statuses/index-esm.js:172\"",
+    "e2e": "playwright test"
   },
   "eslintConfig": {
     "extends": [
