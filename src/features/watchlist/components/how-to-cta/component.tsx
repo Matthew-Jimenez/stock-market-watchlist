@@ -14,6 +14,7 @@ const WatchlistHowToCTA = ({ fadeIn }: Props) => {
   return (
     <Fade in={fadeIn} timeout={FADE_TIMEOUT}>
       <Box
+        data-testid="cta-watchlist-guide"
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}

@@ -42,11 +42,17 @@ const BrowseView = ({ symbol }: Props) => {
                 mountOnEnter
               >
                 <Box marginBottom={2}>
-                  <Typography textOverflow={"hidden"} noWrap variant={"h1"}>
+                  <Typography
+                    data-testid={"copy-search-header"}
+                    textOverflow={"hidden"}
+                    noWrap
+                    variant={"h1"}
+                  >
                     Search for a company
                   </Typography>
                 </Box>
               </Collapse>
+
               <CompanySearchContainer />
             </AnimatedDiv>
 
