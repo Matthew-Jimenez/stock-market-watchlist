@@ -16,14 +16,11 @@ export const useViewModel = () => {
 
 interface Props {
   children: React.ReactNode;
+  model?: BrowseViewModel;
 }
 
-const BrowseProvider = ({ children }: Props) => {
-  return (
-    <Context.Provider value={new BrowseViewModel()}>
-      {children}
-    </Context.Provider>
-  );
+const BrowseProvider = ({ children, model = new BrowseViewModel() }: Props) => {
+  return <Context.Provider value={model}>{children}</Context.Provider>;
 };
 
 export default BrowseProvider;
