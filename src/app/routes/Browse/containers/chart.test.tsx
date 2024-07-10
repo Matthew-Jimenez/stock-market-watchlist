@@ -3,23 +3,12 @@ import BrowseViewModel from "../model";
 import Chart from "./chart";
 import BrowseProvider from "../provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setupServer } from "msw/lib/node";
-import { HttpResponse, http } from "msw";
-import env from "config/env";
 import mondayAtCloseData from "features/company-chart/stubs/intraday-history-one-day";
+import { setupMockServer } from "test-utils/mockServer";
 
 jest.mock("../model");
 
-// todo: extract shared logic to a test-utils file
-const server = setupServer(
-  http.get(`${env.BASE_API}/history`, ({ request }) => {
-    return HttpResponse.json(mondayAtCloseData);
-  })
-);
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+setupMockServer();
 
 describe("Chart container", () => {
   describe("model.setChartComparePoint", () => {

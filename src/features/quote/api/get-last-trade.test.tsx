@@ -1,29 +1,9 @@
-import { setupServer } from "msw/node";
-import { HttpResponse, http } from "msw";
-
 import { renderHook, waitFor } from "@testing-library/react";
 import { useLastTrade } from "./get-last-trade";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import env from "../../../config/env";
+import { setupMockServer } from "test-utils/mockServer";
 
-// todo: extract shared logic to a test-utils file
-const server = setupServer(
-  http.get(`${env.BASE_API}/last-trade`, ({ request }) => {
-    const url = new URL(request.url);
-
-    const symbol = url.searchParams.get("symbol");
-
-    if (symbol !== "AAPL") {
-      return new HttpResponse(null, { status: 404 });
-    }
-
-    return HttpResponse.json({ greeting: "hello there" });
-  })
-);
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+setupMockServer();
 
 describe("useLastTrade", () => {
   it("should call QuoteAPI.getLastTrade with the symbol", async () => {
