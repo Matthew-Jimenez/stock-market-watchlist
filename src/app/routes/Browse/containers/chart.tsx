@@ -18,6 +18,7 @@ const Chart = ({ symbol, width, height }: Props) => {
   const handleRangeChange = useCallback(
     (range?: number, data?: HistoricalPrice[]) => {
       if (range === 1) {
+        model.setChartComparePoint(undefined);
         return;
       }
 
