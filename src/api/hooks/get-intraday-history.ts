@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import MainAPI from "../../../api/api";
+import APIClient from "../clients/api";
 import REFETCH_INTERVAL from "config/refetchIntervals";
 
 type Options = {
@@ -16,7 +16,7 @@ export const useIntradayHistory = ({
   return useQuery({
     queryKey: ["symbol-history", range, symbol],
     queryFn: () => {
-      const api = new MainAPI();
+      const api = new APIClient();
 
       if (!symbol) throw new Error("Symbol is required");
 

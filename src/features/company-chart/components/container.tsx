@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useIntradayHistory } from "../api/get-intraday-history";
+import { useIntradayHistory } from "../../../api/hooks/get-intraday-history";
 import Chart from "./component";
 import RangeSelector from "./range-selector/component";
 import React from "react";
