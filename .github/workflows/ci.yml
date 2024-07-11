@@ -34,6 +34,10 @@ jobs:
 
       - name: Build project
         run: yarn build
+        env:
+          REACT_APP_BASE_API: ${{ secrets.REACT_APP_BASE_API }}
+          REACT_APP_ALGOLIA_APP_ID: ${{ secrets.REACT_APP_ALGOLIA_APP_ID }}
+          REACT_APP_ALGOLIA_SEARCH_KEY: ${{ secrets.REACT_APP_ALGOLIA_SEARCH_KEY }}
 
       - name: Start server
         run: |
