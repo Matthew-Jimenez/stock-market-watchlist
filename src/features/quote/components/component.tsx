@@ -32,7 +32,7 @@ const QuoteComponent = ({ price, comparePrice }: Params) => {
         )}
       </Typography>
 
-      <Typography variant="h5" data-testid="copy-underlying-change">
+      <Typography variant="h5" data-testid="copy--underlying-change">
         {change?.toNearest(0.01)?.toFixed(2)} ({changePercentage?.toFixed(2)}%)
       </Typography>
     </Box>

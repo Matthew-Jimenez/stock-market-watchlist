@@ -1,29 +1,10 @@
-import { setupServer } from "msw/node";
-import { HttpResponse, http } from "msw";
-
 import { renderHook, waitFor } from "@testing-library/react";
 import { useIntradayHistory } from "./get-intraday-history";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import env from "../../../config/env";
+import { setupMockServer } from "test-utils/mockServer";
+import oneDayHistory from "test-utils/fixtures/history/oneDay";
 
-// todo: extract shared logic to a test-utils file
-const server = setupServer(
-  http.get(`${env.BASE_API}/history`, ({ request }) => {
-    const url = new URL(request.url);
-
-    const symbol = url.searchParams.get("symbol");
-
-    if (symbol !== "AAPL") {
-      return new HttpResponse(null, { status: 404 });
-    }
-
-    return HttpResponse.json({ greeting: "hello there" });
-  })
-);
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+setupMockServer();
 
 describe("useIntradayHistory", () => {
   it("should call QuoteAPI.getIntradayHistory with the symbol", async () => {
@@ -43,8 +24,6 @@ describe("useIntradayHistory", () => {
       wrapper,
     });
 
-    await waitFor(() =>
-      expect(result.current.data).toEqual({ greeting: "hello there" })
-    );
+    await waitFor(() => expect(result.current.data).toEqual(oneDayHistory));
   });
 });
