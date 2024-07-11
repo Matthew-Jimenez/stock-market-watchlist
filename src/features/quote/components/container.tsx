@@ -15,10 +15,13 @@ const QuoteContainer = ({
 }: Params) => {
   const { data } = useQuote({ symbol });
 
-  // If priceOverride is provided, prefer comparePriceOverride over data?.previousClose
   // If priceOverride is not provided, use data?.previousClose as comparePrice
+  // If priceOverride is provided, prefer comparePriceOverride over data?.previousClose,
+  // but fallback to data?.previousClose if comparePriceOverride is not provided
   const comparePrice =
-    priceOverride !== undefined ? comparePriceOverride : data?.previousClose;
+    priceOverride !== undefined
+      ? comparePriceOverride || data?.previousClose
+      : data?.previousClose;
 
   return (
     <QuoteComponent
