@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import MainAPI from "../../../api/api";
+import REFETCH_INTERVAL from "config/refetchIntervals";
 
 type Options = {
   symbol?: string;
@@ -9,7 +10,7 @@ type Options = {
 
 export const useIntradayHistory = ({
   symbol,
-  refetchInterval,
+  refetchInterval = REFETCH_INTERVAL.underlyingHistory,
   range = 1,
 }: Options) => {
   return useQuery({

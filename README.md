@@ -26,7 +26,7 @@
 
 :white_large_square: Quote displays aftermarket price from 1pm to 6am EST
 
-:white_large_square: Quote refetches every 1.5 seconds
+:white_check_mark: Quote refetches every 1.5 seconds
 
 
 #### Charts

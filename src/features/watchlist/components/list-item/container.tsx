@@ -9,7 +9,7 @@ interface Props {
 }
 
 const WatchlistListItem = ({ symbol }: Props) => {
-  const { data } = useQuote({ symbol, refetchInterval: 15000 });
+  const { data } = useQuote({ symbol });
 
   return <Component symbol={symbol} price={data?.price} />;
 };
