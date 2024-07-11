@@ -7,6 +7,10 @@ class Decimal {
     this.dec = _value !== undefined ? new DDecimal(_value) : undefined;
   }
 
+  public get isPositive(): boolean {
+    return this.dec?.isPositive() ?? false;
+  }
+
   public plus(adden?: string | number): Decimal | undefined {
     if (adden === undefined) {
       return undefined;

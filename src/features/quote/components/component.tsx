@@ -7,6 +7,7 @@ import Box from "components/box/component";
 import Typography from "components/typography";
 import toDollarValue from "utils/format/toDollarValue";
 import Decimal from "utils/math/decimal";
+import { COLORS } from "lib/material-ui";
 
 interface Params {
   price?: number;
@@ -20,7 +21,7 @@ const QuoteComponent = ({ price, comparePrice }: Params) => {
   return (
     <Box display="flex" alignItems="baseline">
       <Typography
-        marginRight={2}
+        marginRight={1.5}
         variant="h1"
         data-testid="copy--underlying-price"
       >
@@ -32,7 +33,11 @@ const QuoteComponent = ({ price, comparePrice }: Params) => {
         )}
       </Typography>
 
-      <Typography variant="h5" data-testid="copy--underlying-change">
+      <Typography
+        variant="h5"
+        data-testid="copy--underlying-change"
+        color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
+      >
         {change?.toNearest(0.01)?.toFixed(2)} ({changePercentage?.toFixed(2)}%)
       </Typography>
     </Box>

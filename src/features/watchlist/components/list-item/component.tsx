@@ -10,6 +10,7 @@ import Decimal from "utils/math/decimal";
 import displaySymbol from "utils/format/displaySymbol";
 import SparkChartContainer from "components/chart/spark-chart/spark-chart.container";
 import useDimensions from "utils/layout/useDimensions";
+import { COLORS } from "lib/material-ui";
 
 interface Params {
   symbol?: string;
@@ -58,10 +59,12 @@ const WatchlistListItem = ({ symbol, price, comparePrice }: Params) => {
           >
             {toDollarValue(price)}
           </Typography>
+
           <Typography
             textAlign="center"
             variant="body1"
             data-testid="copy--watchlist-change"
+            color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
           >
             {changePercentage?.toFixed(2)}%
           </Typography>
