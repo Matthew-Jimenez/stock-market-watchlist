@@ -11,7 +11,13 @@ interface Props {
 const WatchlistListItem = ({ symbol }: Props) => {
   const { data } = useQuote({ symbol });
 
-  return <Component symbol={symbol} price={data?.price} />;
+  return (
+    <Component
+      symbol={symbol}
+      price={data?.price}
+      comparePrice={data?.previousClose}
+    />
+  );
 };
 
 export default WatchlistListItem;

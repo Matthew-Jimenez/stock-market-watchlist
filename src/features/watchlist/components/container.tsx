@@ -1,10 +1,10 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
-import List from "components/list/component";
 import Box from "components/box/component";
 import Slide from "components/transitions/Slide";
 
+import List from "./list/watchlist-list.component";
 import WatchlistHowToCTA from "./how-to-cta/component";
 import WatchlistListItem from "./list-item/container";
 import { SLIDE_TIMEOUT } from "./styles";
