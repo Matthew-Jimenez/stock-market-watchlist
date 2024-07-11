@@ -49,13 +49,15 @@
 #### Watchlist
 :white_check_mark: Selecting a watchlist item, focuses that company into the company/search view
 
-:white_large_square: Watchlist items display quote, change on day, and a small non interactive intraday chart
+:white_check_mark: Watchlist items display quote, change on day, and a small non interactive intraday chart
 
 :white_large_square: Watchlist items can be removed by selecting the watchlist edit button
 
 :white_large_square: The watchlist edit button displays a delete button to the right of each watchlist item
 
-:white_large_square: The watchlist should be infinite scrolling w/ support for list virtulization
+:white_check_mark: The watchlist should be infinite scrolling 
+
+:white_large_square: The watchlist should support for list virtulization
 
 
 

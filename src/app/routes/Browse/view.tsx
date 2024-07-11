@@ -17,6 +17,9 @@ import {
   COMPANY_NAME_CONTAINER_STYLES,
   CONTAINER_STYLES,
   FADE_TIMEOUT,
+  GRID0,
+  GRID1,
+  WATCHLIST_CONTAINER,
   WATCHLIST_HEADER_STYLES,
 } from "./config/styles";
 
@@ -31,10 +34,22 @@ const BrowseView = ({ symbol }: Props) => {
 
   return (
     <Container style={CONTAINER_STYLES} maxWidth={"xl"}>
-      <Box minHeight={"90%"} display={"flex"} flexDirection={"column"}>
-        <Grid flex={1} container>
-          <Grid item xs={12} lg={8} container direction={"column"}>
-            <AnimatedDiv fullWidth={!symbol?.length} width={"min(90vw, 600px)"}>
+      <Box
+        minHeight={"90%"}
+        display={"flex"}
+        flexDirection={"column"}
+        maxHeight={"100vh"}
+      >
+        <Grid flex={1} container wrap="nowrap" direction={GRID0.direction}>
+          <Grid
+            maxHeight={GRID1.maxHeight}
+            item
+            xs={6}
+            lg={8}
+            container
+            direction="column"
+          >
+            <AnimatedDiv fullWidth={!symbol?.length} width="min(90vw, 600px)">
               <Collapse
                 in={!symbol?.length}
                 timeout={1000}
@@ -71,7 +86,7 @@ const BrowseView = ({ symbol }: Props) => {
             </Fade>
 
             <Fade in={!!symbol?.length} timeout={FADE_TIMEOUT}>
-              <Box ref={targetRef} flex={1} maxHeight={600}>
+              <Box ref={targetRef} flex={1} maxHeight={600} minHeight={300}>
                 {!!dimensions && (
                   <Chart
                     symbol={symbol}
@@ -83,12 +98,18 @@ const BrowseView = ({ symbol }: Props) => {
             </Fade>
           </Grid>
 
-          <Grid item xs={12} lg={4}>
+          <Grid item xs={6} lg={4}>
             <Typography sx={WATCHLIST_HEADER_STYLES} variant={"h6"}>
               Watchlist
             </Typography>
 
-            <WatchlistList />
+            <Box
+              overflow={WATCHLIST_CONTAINER.overflow}
+              maxHeight={WATCHLIST_CONTAINER.maxHeight}
+              style={WATCHLIST_CONTAINER.style}
+            >
+              <WatchlistList />
+            </Box>
           </Grid>
         </Grid>
       </Box>
