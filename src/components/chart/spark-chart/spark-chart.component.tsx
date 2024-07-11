@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { HistoricalPrice } from "types/api";
 import generateChartTicks from "utils/chart/generateChartTicks";
 
-import { CHART_PADDING, axisStyles } from "./config";
+import { CHART_PADDING, LINE_STYLES, axisStyles } from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
@@ -34,6 +34,7 @@ const SparkChart = ({ data, range, height, width }: Params) => {
 
         {data?.length && (
           <VictoryLine
+            style={LINE_STYLES}
             data-testid="company-chart-line"
             data={data}
             x="date"
