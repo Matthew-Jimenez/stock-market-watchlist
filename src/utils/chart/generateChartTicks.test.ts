@@ -1,4 +1,4 @@
-import intradayTicks from "../fixtures/intraday-ticks";
+import intradayTicks from "../../features/company-chart/fixtures/intraday-ticks";
 import generateChartTicks from "./generateChartTicks";
 
 describe("generateChartTicks", () => {

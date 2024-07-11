@@ -1,10 +1,10 @@
 import { GridProps, Grid as MUIGrid } from "@mui/material";
-import { memo } from "react";
+import { Ref, forwardRef, memo } from "react";
 
 interface Props extends GridProps {}
 
-const Grid = (props: Props) => {
-  return <MUIGrid {...props} />;
-};
+const Grid = forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
+  return <MUIGrid {...props} ref={ref} />;
+});
 
 export default memo(Grid);

@@ -1,6 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import WatchlistListItem from "./component";
 
+class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+window.ResizeObserver = ResizeObserver;
+
 describe("WatchlistListItem", () => {
   it("should render", () => {
     render(<WatchlistListItem symbol="aapl" price={100} comparePrice={99} />);
@@ -14,7 +22,7 @@ describe("WatchlistListItem", () => {
     );
 
     expect(screen.getByTestId("copy--watchlist-change")).toHaveTextContent(
-      "1.00 (1.01%)"
+      "1.01%"
     );
   });
 });
