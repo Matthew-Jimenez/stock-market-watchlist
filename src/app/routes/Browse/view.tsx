@@ -19,6 +19,7 @@ import {
   FADE_TIMEOUT,
   GRID0,
   GRID1,
+  GRID2_BORDER,
   WATCHLIST_CONTAINER,
   WATCHLIST_HEADER_STYLES,
 } from "./config/styles";
@@ -103,12 +104,14 @@ const BrowseView = ({ symbol }: Props) => {
               Watchlist
             </Typography>
 
-            <Box
-              overflow={WATCHLIST_CONTAINER.overflow}
-              maxHeight={WATCHLIST_CONTAINER.maxHeight}
-              style={WATCHLIST_CONTAINER.style}
-            >
-              <WatchlistList />
+            <Box border={GRID2_BORDER} borderRadius={2} pt={0}>
+              <Box
+                overflow={WATCHLIST_CONTAINER.overflow}
+                maxHeight={WATCHLIST_CONTAINER.maxHeight}
+                style={WATCHLIST_CONTAINER.style}
+              >
+                <WatchlistList />
+              </Box>
             </Box>
           </Grid>
         </Grid>

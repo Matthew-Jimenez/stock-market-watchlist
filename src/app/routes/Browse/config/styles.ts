@@ -58,3 +58,8 @@ export const GRID1 = {
     lg: "initial",
   },
 };
+
+export const GRID2_BORDER = {
+  xs: "none",
+  lg: "1px solid lightgrey",
+};
