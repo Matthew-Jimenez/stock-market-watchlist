@@ -23,6 +23,16 @@ export const LINE_STYLES = {
   },
 };
 
+export const AXIS_STYLES = {
+  axis: {
+    stroke: "lightgrey",
+    display: "none",
+  },
+  tickLabels: {
+    fill: "lightgrey",
+  },
+};
+
 export const tickFormat = () => "";
 
 export const CHART_LABELS = () => ".";
