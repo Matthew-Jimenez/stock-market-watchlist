@@ -1,19 +1,30 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
-import React from "react";
+import { memo } from "react";
 import Skeleton from "react-loading-skeleton";
 
-import toDollarValue from "../../../utils/format/toDollarValue";
-import Typography from "../../../components/typography";
+import Box from "components/box/component";
+import Typography from "components/typography";
+import toDollarValue from "utils/format/toDollarValue";
+import Decimal from "utils/math/decimal";
+import { COLORS } from "lib/material-ui";
 
 interface Params {
   price?: number;
+  comparePrice?: number;
 }
 
-const QuoteComponent = ({ price }: Params) => {
+const QuoteComponent = ({ price, comparePrice }: Params) => {
+  const change = new Decimal(price).minus(comparePrice);
+  const changePercentage = change?.div(comparePrice)?.times(100);
+
   return (
-    <div>
-      <Typography variant="h1" data-testid="copy--underlying-price">
+    <Box display="flex" alignItems="baseline">
+      <Typography
+        marginRight={1.5}
+        variant="h1"
+        data-testid="copy--underlying-price"
+      >
         {toDollarValue(price) || (
           <Skeleton
             containerTestId="loading-skeleton--underlying-price"
@@ -21,8 +32,16 @@ const QuoteComponent = ({ price }: Params) => {
           />
         )}
       </Typography>
-    </div>
+
+      <Typography
+        variant="h5"
+        data-testid="copy--underlying-change"
+        color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
+      >
+        {change?.toNearest(0.01)?.toFixed(2)} ({changePercentage?.toFixed(2)}%)
+      </Typography>
+    </Box>
   );
 };
 
-export default React.memo(QuoteComponent);
+export default memo(QuoteComponent);

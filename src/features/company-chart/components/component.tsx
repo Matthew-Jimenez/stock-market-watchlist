@@ -6,10 +6,16 @@ import {
 } from "victory";
 import { HistoricalPrice } from "../../../types/api";
 import { useCallback, useMemo, useState } from "react";
-import generateChartTicks from "../utils/generateChartTicks";
+import generateChartTicks from "../../../utils/chart/generateChartTicks";
 import { VoronoiHistoricalPrice } from "../types/VoronoiHistoricalPrice";
 import HoverLabel from "./hover-label/component";
-import { CHART_LABELS, CHART_PADDING, tickFormat } from "./config";
+import {
+  AXIS_STYLES,
+  CHART_LABELS,
+  CHART_PADDING,
+  LINE_STYLES,
+  tickFormat,
+} from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
@@ -79,11 +85,16 @@ const CompanyChart = ({
           />
         }
       >
-        <VictoryAxis tickValues={ticks} tickFormat={tickFormat} />
-        <VictoryAxis dependentAxis />
+        <VictoryAxis
+          tickValues={ticks}
+          tickFormat={tickFormat}
+          style={AXIS_STYLES}
+        />
+        <VictoryAxis dependentAxis style={AXIS_STYLES} />
 
         {data?.length && (
           <VictoryLine
+            style={LINE_STYLES}
             data-testid="company-chart-line"
             data={data}
             x="date"

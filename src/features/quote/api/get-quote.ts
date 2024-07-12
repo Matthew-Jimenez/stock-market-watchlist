@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import MainAPI from "../../../api/api";
+import APIClient from "../../../api/clients/api";
+import REFETCH_INTERVAL from "config/refetchIntervals";
 
 type UseQuoteOptions = {
   symbol?: string;
-  refetchInterval?: number;
 };
 
-export const useQuote = ({ symbol, refetchInterval }: UseQuoteOptions) => {
+export const useQuote = ({ symbol }: UseQuoteOptions) => {
   return useQuery({
     queryKey: ["quote", symbol],
     queryFn: async () => {
-      const api = new MainAPI();
+      const api = new APIClient();
 
       if (!symbol) throw new Error("Symbol is required");
 
@@ -19,6 +19,6 @@ export const useQuote = ({ symbol, refetchInterval }: UseQuoteOptions) => {
       return res?.[0];
     },
     enabled: !!symbol,
-    refetchInterval: 1000,
+    refetchInterval: REFETCH_INTERVAL.underlyingQuote,
   });
 };

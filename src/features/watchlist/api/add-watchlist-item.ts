@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 
-import MainAPI from "api/api";
+import APIClient from "api/clients/api";
 import { queryClient } from "lib/react-query";
 
 const useAddToWatchlist = () => {
   return useMutation({
     mutationKey: ["watchlist"],
     mutationFn: (symbol: string) => {
-      const api = new MainAPI();
+      const api = new APIClient();
 
       return api.addWatchlistItem(symbol);
     },

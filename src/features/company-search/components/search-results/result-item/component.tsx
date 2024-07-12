@@ -22,7 +22,7 @@ const SearchResultItem = ({ symbol, companyName, onSelection }: Props) => {
   return (
     <ListItemButton divider onClick={handleSelection}>
       <Grid container alignItems={CONTAINER_GRID.alignItems}>
-        <Grid item xs={4} md={1.5}>
+        <Grid item xs={4} md={2.25}>
           <Typography fontWeight={600} variant="h5">
             {symbol}
           </Typography>

@@ -19,4 +19,14 @@ describe("Quote component", () => {
       ).toBeInTheDocument();
     });
   });
+
+  describe("change", () => {
+    it("renders the change in price and percentage", () => {
+      render(<QuoteComponent price={123.45} comparePrice={100} />);
+
+      expect(screen.getByTestId("copy--underlying-change")).toHaveTextContent(
+        "23.45 (23.45%)"
+      );
+    });
+  });
 });

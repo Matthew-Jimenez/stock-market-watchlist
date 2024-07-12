@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import MainAPI from "../../../api/api";
+import APIClient from "../../../api/clients/api";
 
 type Options = {
   symbol?: string;
@@ -9,7 +9,7 @@ export const useCompany = ({ symbol }: Options) => {
   return useQuery({
     queryKey: ["company-info", symbol],
     queryFn: async () => {
-      const api = new MainAPI();
+      const api = new APIClient();
 
       if (!symbol) throw new Error("Symbol is required");
 

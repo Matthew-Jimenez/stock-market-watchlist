@@ -12,7 +12,11 @@ const Quote = ({ symbol }: Props) => {
   const model = useViewModel();
 
   return (
-    <QuoteContainer priceOverride={model.hoveredPoint?.close} symbol={symbol} />
+    <QuoteContainer
+      priceOverride={model.hoveredPoint?.close}
+      symbol={symbol}
+      comparePriceOverride={model.chartComparePoint?.close}
+    />
   );
 };
 

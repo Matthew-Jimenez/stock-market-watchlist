@@ -1,17 +1,20 @@
-import { memo, useState } from "react";
-import { useIntradayHistory } from "../api/get-intraday-history";
-import Chart from "./component";
-import RangeSelector from "./range-selector/component";
+import { memo, useEffect, useState } from "react";
+
+import { HistoricalPrice } from "types/api";
 import { useQuote } from "features/quote/api/get-quote";
 import dateFromMillis from "utils/dates/dateFromMillis";
-import { HistoricalPrice } from "types/api";
-import addCurrentToHistory from "../utils/addCurrentToHistory";
+import addCurrentToHistory from "utils/chart/addCurrentToHistory";
+import { useIntradayHistory } from "api/hooks/get-intraday-history";
+
+import Chart from "./component";
+import RangeSelector from "./range-selector/component";
 
 interface Params {
   symbol?: string;
   onPointHovered?: (point: any) => void;
   height?: number;
   width?: number;
+  onRangeChange?: (range?: number, data?: HistoricalPrice[]) => void;
 }
 
 const CompanyChartContainer = ({
@@ -19,12 +22,13 @@ const CompanyChartContainer = ({
   onPointHovered,
   height,
   width,
+  onRangeChange,
 }: Params) => {
   const [range, setRange] = useState<number>(1);
 
   const { data } = useIntradayHistory({ symbol, range });
 
-  const { data: quote } = useQuote({ symbol, refetchInterval: 1000 });
+  const { data: quote } = useQuote({ symbol });
 
   const quotePoint = quote?.price
     ? {
@@ -34,6 +38,12 @@ const CompanyChartContainer = ({
     : undefined;
 
   const history = addCurrentToHistory({ history: data, quote: quote });
+
+  useEffect(() => {
+    if (onRangeChange) {
+      onRangeChange(range, data);
+    }
+  }, [data, range, onRangeChange]);
 
   return (
     <div style={{ height, width }}>

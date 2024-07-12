@@ -1,6 +1,6 @@
-import { HistoricalPrice } from "../../../types/api";
+import { HistoricalPrice } from "types/api";
 
-const mondayAtCloseData = [
+const oneDayHistory = [
   {
     date: "2024-07-01 09:30:00",
     open: 545.63,
@@ -627,4 +627,4 @@ const mondayAtCloseData = [
   },
 ] as HistoricalPrice[];
 
-export default mondayAtCloseData;
+export default oneDayHistory;

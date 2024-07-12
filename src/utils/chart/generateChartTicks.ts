@@ -1,4 +1,4 @@
-import dateFromFormat from "../../../utils/dates/dateFromFormat";
+import dateFromFormat from "../dates/dateFromFormat";
 
 const generateChartTicks = (latestDate?: string, range?: number) => {
   const lastPointDate = dateFromFormat({

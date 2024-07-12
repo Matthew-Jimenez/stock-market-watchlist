@@ -1,8 +1,13 @@
-import env from "../config/env";
-import BaseAPI from "../lib/api-client";
-import { CompanyInfo, HistoricalPrice, LastTrade, Quote } from "../types/api";
+import env from "../../config/env";
+import BaseAPIClient from "../../lib/api-client";
+import {
+  CompanyInfo,
+  HistoricalPrice,
+  LastTrade,
+  Quote,
+} from "../../types/api";
 
-class MainAPI extends BaseAPI {
+class APIClient extends BaseAPIClient {
   constructor() {
     super(env.BASE_API);
   }
@@ -64,4 +69,4 @@ class MainAPI extends BaseAPI {
   };
 }
 
-export default MainAPI;
+export default APIClient;

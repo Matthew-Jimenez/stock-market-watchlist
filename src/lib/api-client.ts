@@ -1,4 +1,4 @@
-class BaseAPI {
+class BaseAPIClient {
   constructor(private baseUrl: string) {}
 
   public get = async <ResponseType>(url: string) => {
@@ -14,4 +14,4 @@ class BaseAPI {
   };
 }
 
-export default BaseAPI;
+export default BaseAPIClient;
