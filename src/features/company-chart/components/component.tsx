@@ -9,13 +9,7 @@ import { useCallback, useMemo, useState } from "react";
 import generateChartTicks from "../../../utils/chart/generateChartTicks";
 import { VoronoiHistoricalPrice } from "../types/VoronoiHistoricalPrice";
 import HoverLabel from "./hover-label/component";
-import {
-  AXIS_STYLES,
-  CHART_LABELS,
-  CHART_PADDING,
-  LINE_STYLES,
-  tickFormat,
-} from "./config";
+import { AXIS_STYLES, CHART_LABELS, CHART_PADDING, tickFormat } from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
@@ -23,6 +17,7 @@ interface Params {
   onPointHovered?: (point?: HistoricalPrice) => void;
   height?: number;
   width?: number;
+  lineColor?: string;
 }
 
 const CompanyChart = ({
@@ -31,6 +26,7 @@ const CompanyChart = ({
   onPointHovered,
   height,
   width,
+  lineColor,
 }: Params) => {
   const _lastPointDate = data?.[data.length - 1]?.date;
 
@@ -61,6 +57,15 @@ const CompanyChart = ({
     onPointHovered?.();
     setShowLabel(false);
   }, [onPointHovered, setShowLabel]);
+
+  const styles = useMemo(() => {
+    return {
+      data: {
+        stroke: lineColor,
+        strokeWidth: 2,
+      },
+    };
+  }, [lineColor]);
 
   return (
     <div
@@ -94,7 +99,7 @@ const CompanyChart = ({
 
         {data?.length && (
           <VictoryLine
-            style={LINE_STYLES}
+            style={styles}
             data-testid="company-chart-line"
             data={data}
             x="date"

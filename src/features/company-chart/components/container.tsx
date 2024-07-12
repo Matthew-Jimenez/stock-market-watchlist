@@ -1,10 +1,10 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 
 import { HistoricalPrice } from "types/api";
 import { useQuote } from "features/quote/api/get-quote";
-import dateFromMillis from "utils/dates/dateFromMillis";
 import addCurrentToHistory from "utils/chart/addCurrentToHistory";
 import { useIntradayHistory } from "api/hooks/get-intraday-history";
+import deriveLineColor from "utils/chart/deriveLineColor";
 
 import Chart from "./component";
 import RangeSelector from "./range-selector/component";
@@ -30,14 +30,11 @@ const CompanyChartContainer = ({
 
   const { data: quote } = useQuote({ symbol });
 
-  const quotePoint = quote?.price
-    ? {
-        date: dateFromMillis({ date: quote.timestamp }),
-        close: quote.price,
-      }
-    : undefined;
+  const history = addCurrentToHistory({ history: data, quote: quote, range });
 
-  const history = addCurrentToHistory({ history: data, quote: quote });
+  const comparePoit = range === 1 ? quote?.previousClose : data?.[0].close;
+  const current = quote?.price;
+  const lineColor = deriveLineColor(current, comparePoit);
 
   useEffect(() => {
     if (onRangeChange) {
@@ -45,22 +42,22 @@ const CompanyChartContainer = ({
     }
   }, [data, range, onRangeChange]);
 
+  const heightAndWidth = useMemo(() => {
+    return { height, width };
+  }, [height, width]);
+
   return (
-    <div style={{ height, width }}>
-      <h5>{history?.[history.length - 1].date}</h5>
-      <p>{quotePoint?.date?.toFormat("MMM dd h:mm:ss z")}</p>
-      <p>{quotePoint?.close.toFixed(2)}</p>
+    <div style={heightAndWidth}>
       <Chart
         onPointHovered={onPointHovered}
-        data={data}
+        data={history}
         range={range}
         height={height ? height - 40 : undefined}
         width={width}
+        lineColor={lineColor}
       />
 
-      <div style={{ height: 40, overflow: "hidden" }}>
-        <RangeSelector onSetRange={setRange} range={range} />
-      </div>
+      <RangeSelector onSetRange={setRange} range={range} />
     </div>
   );
 };

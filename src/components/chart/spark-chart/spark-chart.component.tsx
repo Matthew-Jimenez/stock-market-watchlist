@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { HistoricalPrice } from "types/api";
 import generateChartTicks from "utils/chart/generateChartTicks";
 
-import { CHART_PADDING, LINE_STYLES, axisStyles } from "./config";
+import { CHART_PADDING, axisStyles } from "./config";
 
 interface Params {
   data?: HistoricalPrice[];
@@ -12,14 +12,23 @@ interface Params {
   onPointHovered?: (point?: HistoricalPrice) => void;
   height?: number;
   width?: number;
+  lineColor?: string;
 }
 
-const SparkChart = ({ data, range, height, width }: Params) => {
+const SparkChart = ({ data, range, height, width, lineColor }: Params) => {
   const _lastPointDate = data?.[data.length - 1]?.date;
 
   const ticks = useMemo(() => {
     return generateChartTicks(_lastPointDate, range);
   }, [range, _lastPointDate]);
+
+  const styles = useMemo(() => {
+    return {
+      data: {
+        stroke: lineColor,
+      },
+    };
+  }, [lineColor]);
 
   return (
     <div>
@@ -34,7 +43,7 @@ const SparkChart = ({ data, range, height, width }: Params) => {
 
         {data?.length && (
           <VictoryLine
-            style={LINE_STYLES}
+            style={styles}
             data-testid="company-chart-line"
             data={data}
             x="date"

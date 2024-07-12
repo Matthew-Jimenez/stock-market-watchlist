@@ -38,4 +38,5 @@ export const muiTheme = responsiveFontSizes(
 export const COLORS = {
   chartRed: "#c43a31",
   chartGreen: "#00C805",
+  black: "#000000",
 };

@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import dateFromFormat from "utils/dates/dateFromFormat";
 
 interface Params {
@@ -9,7 +8,9 @@ interface Params {
   };
 }
 
+// round the current price (quote) to the nearest interval for charting purposes
 const roundCurrentByInterval = ({ date, interval }: Params) => {
+  // remove seconds from the date
   const dateObj = dateFromFormat({ date, format: "yyyy-MM-dd HH:mm:ss" })?.set({
     second: 0,
   });
@@ -23,9 +24,11 @@ const roundCurrentByInterval = ({ date, interval }: Params) => {
   switch (unit) {
     case "min": {
       // if the dateObj is already at 4pm or greater then we just return the dateObj
-
       if (dateObj?.hour && dateObj.hour >= 16) {
-        return dateObj?.toFormat("yyyy-MM-dd HH:mm:ss");
+        return dateObj
+          ?.startOf("day")
+          .plus({ hour: 16 })
+          .toFormat("yyyy-MM-dd HH:mm:ss");
       }
 
       // round to nearest 5 minuts
@@ -37,25 +40,25 @@ const roundCurrentByInterval = ({ date, interval }: Params) => {
         .toFormat("yyyy-MM-dd HH:mm:ss");
     }
 
-    case "hour": {
-      if (dateObj?.hour && dateObj.hour >= 16) {
-        return dateObj?.toFormat("yyyy-MM-dd HH:mm:ss");
-      }
+    // case "hour": {
+    //   if (dateObj?.hour && dateObj.hour >= 16) {
+    //     return dateObj?.toFormat("yyyy-MM-dd HH:mm:ss");
+    //   }
 
-      return dateObj?.plus({ hour: value }).toFormat("yyyy-MM-dd HH:mm:ss");
-    }
+    //   return dateObj?.plus({ hour: value }).toFormat("yyyy-MM-dd HH:mm:ss");
+    // }
 
-    case "day": {
-      return dateObj
-        ?.set({ hour: 0, minute: 0, second: 0 })
-        .toFormat("yyyy-MM-dd HH:mm:ss");
-    }
+    // case "day": {
+    //   return dateObj
+    //     ?.set({ hour: 0, minute: 0, second: 0 })
+    //     .toFormat("yyyy-MM-dd HH:mm:ss");
+    // }
 
-    case "week": {
-      return dateObj
-        ?.set({ weekday: 1, hour: 0, minute: 0, second: 0 })
-        .toFormat("yyyy-MM-dd HH:mm:ss");
-    }
+    // case "week": {
+    //   return dateObj
+    //     ?.set({ weekday: 1, hour: 0, minute: 0, second: 0 })
+    //     .toFormat("yyyy-MM-dd HH:mm:ss");
+    // }
 
     default: {
       return dateObj?.set({ second: 0 }).toFormat("yyyy-MM-dd HH:mm:ss");

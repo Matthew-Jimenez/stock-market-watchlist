@@ -6,44 +6,19 @@ import dateFromFormat from "utils/dates/dateFromFormat";
 interface Params {
   history?: HistoricalPrice[];
   quote?: Quote;
-  // in minutes
-  interval?: {
-    value: number;
-    unit: "min" | "hour" | "day" | "week";
-  };
+  range: number;
 }
 
-const getIntervalForRange = (range: number) => {
-  switch (range) {
-    case 1: {
-      return "5min";
-    }
-
-    case 5: {
-      return "15min";
-    }
-
-    case 30: {
-      return "1hour";
-    }
-
-    case 90: {
-      return "1day";
-    }
-
-    case 365: {
-      return "1day";
-    }
-
-    default: {
-      return "1week";
-    }
+const addCurrentToHistory = ({ history, quote, range }: Params) => {
+  if (range > 30) {
+    return history;
   }
-};
 
-const addCurrentToHistory = ({ history, quote, interval }: Params) => {
+  // the last point in historcal pricing
   const lastHistoryPoint = history?.[history.length - 1];
 
+  // round the current point to the nearest 5 minutes
+  // considerations: we may need to round to nearest 15min, 30min, 1hr, etc.
   const dateString = roundCurrentByInterval({
     date: dateFromMillis({ date: quote?.timestamp })?.toFormat(
       "yyyy-MM-dd HH:mm:ss"
@@ -51,6 +26,8 @@ const addCurrentToHistory = ({ history, quote, interval }: Params) => {
     interval: { value: 5, unit: "min" },
   });
 
+  // define the current point using the rounded date
+  // and the price from the quote
   const current = quote?.price
     ? {
         date: dateFromFormat({
@@ -63,21 +40,19 @@ const addCurrentToHistory = ({ history, quote, interval }: Params) => {
       }
     : (undefined as HistoricalPrice | undefined);
 
+  // if there is no current point or no last point in history
   if (!current?.date || !lastHistoryPoint) {
     return history;
   }
 
   // current is past the last element in history
   if (current.date > lastHistoryPoint.date) {
-    return [...history, current];
+    return [...history, current as HistoricalPrice];
   }
 
-  return history;
-
-  // current is the same as the last element in history (this would only happen in the close of the market)
-
-  // what happens at the open of the market?
-  // history is blank but current is not
+  // if the rounded date is not greater than the last element in history
+  // then we replace the last element in history with the current point
+  return [...history.slice(0, -1), current as HistoricalPrice];
 };
 
 export default addCurrentToHistory;
