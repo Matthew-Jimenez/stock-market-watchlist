@@ -16,17 +16,14 @@ try {
         maskAllText: false,
       }),
     ],
-    // Performance Monitoring
-    tracesSampleRate: isLocal ? 0 : 1, //  Capture 100% of the transactions
-    // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
+    tracesSampleRate: isLocal ? 0 : 1,
     tracePropagationTargets: [
       "localhost",
       /^https:\/\/origami-server-main-staging-8b78948f1f50\.herokuapp\.com\/api/,
       /^https:\/\/stock-market-watchlist\.netlify\.app/,
     ],
-    // Session Replay
-    replaysSessionSampleRate: isLocal ? 0 : 1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
-    replaysOnErrorSampleRate: isLocal ? 0 : 1, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+    replaysSessionSampleRate: isLocal ? 0 : 1,
+    replaysOnErrorSampleRate: isLocal ? 0 : 1,
     environment: env.ENV,
   });
 } catch (error) {
