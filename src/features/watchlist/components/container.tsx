@@ -23,7 +23,7 @@ const WatchlistList = () => {
         <Box>
           <List>
             {data?.map((symbol) => (
-              <Link to={`/?symbol=${symbol}`} style={style}>
+              <Link key={symbol} to={`/?symbol=${symbol}`} style={style}>
                 <WatchlistListItem symbol={symbol} />
               </Link>
             ))}
