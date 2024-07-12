@@ -10,7 +10,11 @@ try {
     dsn: env.SENTRY_DSN,
     integrations: [
       Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration(),
+      Sentry.replayIntegration({
+        blockAllMedia: false,
+        maskAllInputs: false,
+        maskAllText: false,
+      }),
     ],
     // Performance Monitoring
     tracesSampleRate: isLocal ? 0 : 1, //  Capture 100% of the transactions
