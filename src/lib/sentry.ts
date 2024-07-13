@@ -8,14 +8,16 @@ try {
   Sentry.init({
     release: process.env.npm_package_version,
     dsn: env.SENTRY_DSN,
-    integrations: [
-      Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration({
-        blockAllMedia: false,
-        maskAllInputs: false,
-        maskAllText: false,
-      }),
-    ],
+    integrations: isLocal
+      ? []
+      : [
+          Sentry.browserTracingIntegration(),
+          Sentry.replayIntegration({
+            blockAllMedia: false,
+            maskAllInputs: false,
+            maskAllText: false,
+          }),
+        ],
     tracesSampleRate: isLocal ? 0 : 1,
     tracePropagationTargets: [
       "localhost",

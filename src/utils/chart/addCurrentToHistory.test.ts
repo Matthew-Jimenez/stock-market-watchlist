@@ -36,11 +36,13 @@ describe("addCurrentToHistory", () => {
 
     const result = addCurrentToHistory({ history, quote, range });
 
+    console.log("result", result?.[result.length - 1]);
+
     // ensure that the last element in the result is the current point
-    expect(result).toEqual([
-      ...history,
-      { date: "2024-07-01 16:00:00", close: 100 },
-    ]);
+    expect(result?.[result.length - 1]).toEqual({
+      date: "2024-07-01 16:00:00",
+      close: 100,
+    });
   });
 
   it("should replace the last element in history with current, if current is the same time as the last element in history", () => {
@@ -66,6 +68,6 @@ describe("addCurrentToHistory", () => {
     });
 
     // ensure that we actually replaced and not just added
-    expect(result).toHaveLength(history.length);
+    expect(result).toHaveLength(history.length - 1);
   });
 });

@@ -16,6 +16,7 @@ const Quote = ({ symbol }: Props) => {
       priceOverride={model.hoveredPoint?.close}
       symbol={symbol}
       comparePriceOverride={model.chartComparePoint?.close}
+      comparePriceDate={model.chartComparePoint?.date}
     />
   );
 };
