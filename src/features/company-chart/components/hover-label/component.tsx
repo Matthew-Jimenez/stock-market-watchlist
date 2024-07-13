@@ -2,11 +2,18 @@ import { VictoryLabel, VictoryTooltipProps } from "victory";
 import { VoronoiHistoricalPrice } from "../../types/VoronoiHistoricalPrice";
 import { CHART_PADDING } from "../config";
 import dateFromFormat from "../../../../utils/dates/dateFromFormat";
+import getHoverFormat from "features/company-chart/utils/getHoverFormat";
 
-const HoverLabel = (props: VictoryTooltipProps) => {
-  const { datum, x, y, height = 40 } = props;
+interface Props extends VictoryTooltipProps {
+  range?: number;
+}
+
+const HoverLabel = (props: Props) => {
+  const { datum, x, y, height = 40, range = 0 } = props;
 
   const { date } = datum as VoronoiHistoricalPrice;
+
+  let formatString = getHoverFormat(range);
 
   return (
     <>
@@ -15,7 +22,7 @@ const HoverLabel = (props: VictoryTooltipProps) => {
         {...props}
         y={20}
         text={dateFromFormat({ date, format: "yyyy-MM-dd HH:mm:ss" })?.toFormat(
-          "MMM dd h:mma"
+          formatString
         )}
         dx={-34}
       />

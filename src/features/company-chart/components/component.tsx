@@ -84,7 +84,7 @@ const CompanyChart = ({
           <VictoryVoronoiContainer
             responsive={false}
             onActivated={handlePointHovered}
-            labelComponent={showLabel ? <HoverLabel /> : <></>}
+            labelComponent={showLabel ? <HoverLabel range={range} /> : <></>}
             labels={CHART_LABELS}
             voronoiDimension="x"
           />
@@ -95,6 +95,7 @@ const CompanyChart = ({
           tickFormat={tickFormat}
           style={AXIS_STYLES}
         />
+
         <VictoryAxis dependentAxis style={AXIS_STYLES} />
 
         {data?.length && (
