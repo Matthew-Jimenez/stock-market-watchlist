@@ -35,23 +35,26 @@ const QuoteComponent = ({ price, comparePrice, diffInHours }: Params) => {
         )}
       </Typography>
 
-      <Box display="flex" alignItems="center">
-        <Typography
-          variant="h5"
-          data-testid="copy--underlying-change"
-          color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
-          mr={1}
-        >
-          {change?.toNearest(0.01)?.toFixed(2)} ({changePercentage?.toFixed(2)}
-          %)
-        </Typography>
+      {change !== undefined && (
+        <Box display="flex" alignItems="center">
+          <Typography
+            variant="h5"
+            data-testid="copy--underlying-change"
+            color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
+            mr={1}
+          >
+            {change?.toNearest(0.01)?.toFixed(2)} (
+            {changePercentage?.toFixed(2)}
+            %)
+          </Typography>
 
-        <Typography
-          color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
-        >
-          {howLongAgo(diffInHours)}
-        </Typography>
-      </Box>
+          <Typography
+            color={change?.isPositive ? COLORS.chartGreen : COLORS.chartRed}
+          >
+            {howLongAgo(diffInHours)}
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };
