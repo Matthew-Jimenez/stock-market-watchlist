@@ -32,7 +32,7 @@ describe("QuoteContainer", () => {
       });
 
       // Act
-      const change = screen.getByTestId("copy--underlying-change");
+      const change = await screen.findByTestId("copy--underlying-change");
 
       // Assert
       await waitFor(() => expect(change.textContent).toBe("-1.00 (-0.99%)"));
